@@ -48,7 +48,6 @@ class ContactForm extends Component {
           <label className={styles.contactFormLabel}>
             Name
             <input
-              autoComplete
               required
               type="text"
               name="name"

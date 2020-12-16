@@ -3,6 +3,15 @@ import listActions from "./listActions";
 
 Axios.defaults.baseURL = "https://goit-phonebook-api.herokuapp.com";
 
+const token = {
+  set(token) {
+    Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    Axios.defaults.headers.common.Authorization = "";
+  },
+};
+
 const addContact = ({ name, number }) => (dispatch) => {
   dispatch(listActions.addContactRequest());
 
@@ -10,8 +19,9 @@ const addContact = ({ name, number }) => (dispatch) => {
     name,
     number,
   })
-    .then(({ data }) => {
-      dispatch(listActions.addContactSuccess(data));
+    .then((response) => {
+      token.set(response.data.token);
+      dispatch(listActions.addContactSuccess(response.data));
     })
     .catch((error) => dispatch(listActions.addContactError(error)));
 };
@@ -20,8 +30,8 @@ const fetchContact = () => (dispatch) => {
   dispatch(listActions.fetchContactRequest());
 
   Axios.get("/contacts")
-    .then(({ data }) => {
-      dispatch(listActions.fetchContactSuccess(data));
+    .then((response) => {
+      dispatch(listActions.fetchContactSuccess(response.data));
     })
     .catch((error) => dispatch(listActions.fetchContactError(error)));
 };
