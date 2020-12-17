@@ -46,6 +46,7 @@ class RegisterView extends Component {
           <label>
             Name
             <input
+              required
               type="text"
               name="name"
               value={name}
@@ -56,6 +57,7 @@ class RegisterView extends Component {
           <label>
             Email
             <input
+              required
               type="email"
               name="email"
               value={email}
@@ -66,6 +68,7 @@ class RegisterView extends Component {
           <label>
             Password
             <input
+              required
               type="password"
               name="password"
               value={password}

@@ -21,7 +21,12 @@ const register = (credentials) => (dispatch) => {
       token.set(response.data.token);
       dispatch(authActions.registerSuccess(response.data));
     })
-    .catch((error) => dispatch(authActions.registerError(error)));
+    .catch((error) =>
+      dispatch(
+        authActions.registerError(error),
+        alert("This email address is already in use, please try another!")
+      )
+    );
 };
 
 const logIn = (credentials) => (dispatch) => {
@@ -33,7 +38,14 @@ const logIn = (credentials) => (dispatch) => {
       token.set(response.data.token);
       dispatch(authActions.loginSuccess(response.data));
     })
-    .catch((error) => dispatch(authActions.loginError(error)));
+    .catch((error) =>
+      dispatch(
+        authActions.loginError(error),
+        alert(
+          "This email address is not registered on our website, please register!"
+        )
+      )
+    );
 };
 
 const getCurrentUser = () => (dispatch, getState) => {

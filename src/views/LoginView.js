@@ -45,6 +45,7 @@ class LoginView extends Component {
           <label>
             Email
             <input
+              required
               type="email"
               name="email"
               value={email}
@@ -55,6 +56,7 @@ class LoginView extends Component {
           <label>
             Password
             <input
+              required
               type="password"
               name="password"
               value={password}
